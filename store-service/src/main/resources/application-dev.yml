@@ -1,0 +1,33 @@
+spring:
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://127.0.0.1:5432/store-db
+        name: Store
+        username: postgres
+        password: postgres
+
+    jpa:
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+        database: POSTGRESQL
+        open-in-view: false
+        properties:
+                    hibernate.show_sql: true
+                    hibernate.format_sql: true
+                    hibernate.use_sql_comments: true
+
+    http:
+        encoding:
+            charset : UTF-8 # the encoding of HTTP requests/responses
+            enabled : true # enable http encoding support
+            force : true # force the configured encoding
+            force-request: true
+            force-response: true
+    jackson:
+        deserialization:
+            fail-on-unknown-properties : false
+
+logging:
+  level:
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR

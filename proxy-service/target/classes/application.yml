@@ -1,0 +1,32 @@
+server:
+  port: 8090
+
+eureka:
+  client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${random.int[1,999999]}
+
+spring:
+  application:
+    name: proxy-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+zuul:
+  routes:
+    orders:
+      path: /orders/**
+      serviceId: order-service
+    payments:
+      path: /payments/**
+      serviceId: payment-service
+    stores:
+      path: /stores/**
+      serviceId: store-service
